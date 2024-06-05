@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+
+option go_package = "proto/stakeholder";
+import "google/api/annotations.proto";
+
+
+service StakeholderService {
+  rpc RegisterTourist(RegisterTouristRequest) returns (RegisterTouristResponse) {
+    option (google.api.http) = {
+      post: "/"
+      body: "*"
+    };
+  }
+  rpc Login(LoginRequest) returns (RegisterTouristResponse) {
+    option (google.api.http) = {
+      post: "/login"
+      body: "*"
+    };
+  }
+}
+
+message RegisterTouristRequest {
+  string id = 1;
+  string name = 2;
+  string surname = 3;
+  string email = 4;
+  string username = 5;
+  string password = 6;
+  string profilePicture = 7;
+  string biography = 8;
+  string motto = 9;
+}
+
+message RegisterTouristResponse {
+  string id = 1;
+  string accessToken = 2;
+}
+
+
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+
+
+message Person {
+  string id = 1;
+  uint32 userId = 2;
+  string name = 3;
+  string surname = 4;
+  string email = 5;
+}
+
+message ProfileS {
+  string id = 1;
+  string firstName = 2;
+  string last_name = 3;
+  string profilePicture = 4;
+  string biography = 5;
+  string motto = 6;
+  string userId = 7;
+  bool isActive = 8;
+  uint32 xP = 9;
+  bool isFirstPurchased = 10;
+  bool questionnaireDone = 11;
+  uint32 numberOfCompletedTours = 12;
+  bool requestSent = 13;
+}
+
+message User {
+  string id = 1;
+  string username = 2;
+  string password = 3;
+  UserRole role = 4;
+  bool isActive = 5;
+  string email = 6;
+  string token = 7;
+}
+
+enum UserRole {
+  ADMINISTRATOR = 0;
+  AUTHOR = 1;
+  TOURIST = 2;
+}
